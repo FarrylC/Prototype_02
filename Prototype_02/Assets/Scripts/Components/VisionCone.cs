@@ -1,11 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class VisionCone : MonoBehaviour
 {
 
     public float AngleSweepInDegrees = 60;
     public float ViewDistance = 3;
+
+    // Update is called once per frame
+    void Update()
+    {
+        // If the player is caught in vision cone, restart the game
+        if(IsPlayerInVisionCone())
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 
     /// <summary>
     /// Calculates whether the player is inside the vision cone of an enemy as defined by the AngleSweepIndegrees
