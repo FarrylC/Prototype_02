@@ -69,7 +69,6 @@ public class Player : MonoBehaviour
     /// </summary>
     public HomingMissile SpawnHomingMissile()
     {
-        //Instantiate<GameObject>(HomingMissilePrefab, this.transform.position, this.transform.rotation).GetComponent<HomingMissile>();
         //Checks if we have enough bullets to shoot
 
         if (bulletCount > 0)

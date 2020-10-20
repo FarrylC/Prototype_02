@@ -5,7 +5,7 @@ public class HomingMissile : MonoBehaviour
 {
    
     public float speed = 4;
-    public float destroyTime = 0.75f;
+    public int destroyTime = 1;
     Rigidbody2D rb;
 
     //See Player.cs script's SpawnHomingMissile() to check if enough bullets are available
