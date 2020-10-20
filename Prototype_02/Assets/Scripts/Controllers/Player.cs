@@ -40,7 +40,7 @@ public class Player : MonoBehaviour
             GetComponent<BombSpiral>().SpawnBombSpiral();
         }
 
-        if (Input.GetButtonDown("SpawnHomingMissile")) // 'h' key
+        if (Input.GetButtonDown("SpawnHomingMissile")) // 'h' key, alt key is Left Click/mouse 0
         {
             SpawnHomingMissile();
         }
