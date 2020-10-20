@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public GameObject HomingMissilePrefab;
+    private float bulletCount = 3;
 
     // Update is called once per frame
     void Update()
@@ -50,6 +51,11 @@ public class Player : MonoBehaviour
             GameController.RotateScreenClockwise90Deg();
         }
 
+        if(Input.GetButtonDown("AddBullet")) // right click/Mouse 1
+        {
+            AddBullet();
+        }
+
         // Look towards mouse position
         Vector3 lookPoint = GameController.GetCamera().ScreenToWorldPoint(Input.mousePosition);
         lookPoint.z = this.transform.position.z;
@@ -63,6 +69,29 @@ public class Player : MonoBehaviour
     /// </summary>
     public HomingMissile SpawnHomingMissile()
     {
-        return Instantiate<GameObject>(HomingMissilePrefab, this.transform.position, this.transform.rotation).GetComponent<HomingMissile>();
+        //Instantiate<GameObject>(HomingMissilePrefab, this.transform.position, this.transform.rotation).GetComponent<HomingMissile>();
+        //Checks if we have enough bullets to shoot
+
+        if (bulletCount > 0)
+        {
+            SubtractBullet();
+            return Instantiate<GameObject>(HomingMissilePrefab, this.transform.position, this.transform.rotation).GetComponent<HomingMissile>();
+        }
+            
+
+        return null;
+    }
+
+    public void SubtractBullet()
+    {
+        bulletCount--;
+        Debug.Log("bullets:" + bulletCount);
+
+    }
+    public void AddBullet()
+    {
+        bulletCount++;
+        Debug.Log("bullets:" + bulletCount);
+
     }
 }

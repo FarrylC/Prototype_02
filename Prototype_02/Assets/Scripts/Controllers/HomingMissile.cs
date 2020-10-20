@@ -3,10 +3,12 @@ using System.Collections;
 
 public class HomingMissile : MonoBehaviour
 {
-    public float bulletCount;
+   
     public float speed = 4;
+    public float destroyTime = 0.75f;
     Rigidbody2D rb;
 
+    //See Player.cs script's SpawnHomingMissile() to check if enough bullets are available
 
     /*    public float ForwardSpeed = 1;
         public float RotateSpeedInDeg = 45;*/
@@ -18,6 +20,12 @@ public class HomingMissile : MonoBehaviour
     private void Start()
     {
         rb = transform.GetComponent<Rigidbody2D>();
+    }
+    private void Update()
+    {
+        //Destroys Missile after destroyTime passes
+        Destroy(gameObject, destroyTime);
+        
     }
     void FixedUpdate()
     {
@@ -56,5 +64,11 @@ public class HomingMissile : MonoBehaviour
             Destroy(collision.gameObject);
             Destroy(gameObject);
         }
+
+        //UNCOMMENT BELOW FOR ASTEROIDS to destroy homingMissiles, Checks for a script attached to Asteroids called 'Asteroid;
+        /*else if(collision.gameObject.GetComponent<Asteroid>() = true)
+        {
+            Destroy(gameObject);
+        }*/
     }
 }
