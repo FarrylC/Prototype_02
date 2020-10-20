@@ -4,8 +4,7 @@ using System.Collections;
 public class HomingMissile : MonoBehaviour
 {
     public float bulletCount;
-    public float speed = 4f;
-    public float destroyTime = 5f;
+    public float speed = 4;
     Rigidbody2D rb;
 
 
@@ -50,13 +49,8 @@ public class HomingMissile : MonoBehaviour
 
 
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-       if (collision.gameObject.GetComponent<Enemy>() == true)
-        {
-            //Destroys Enemy Object
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
-        }
+        
     }
 }
