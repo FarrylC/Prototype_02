@@ -9,53 +9,53 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if ( Input.GetButtonDown( "SpawnObjectRelative" ) ) // 'o' key
+
+        if (Input.GetButtonDown("SpawnObjectRelative")) // 'o' key
         {
             GetComponent<PositionPrefabRelative>().PositionPrefabAtRelativePosition();
         }
 
-        if ( Input.GetButtonDown( "GetPlayerToEnemyVector" )) // 'v' key
+        if (Input.GetButtonDown("GetPlayerToEnemyVector")) // 'v' key
         {
-            Debug.Log( GetComponent<VectorToEnemy>().GetVectorToEnemy() );
+            Debug.Log(GetComponent<VectorToEnemy>().GetVectorToEnemy());
         }
 
-        if ( Input.GetButtonDown( "GetPlayerDistanceEnemy" )) // 'd' key
+        if (Input.GetButtonDown("GetPlayerDistanceEnemy")) // 'd' key
         {
-            Debug.Log( GetComponent<VectorToEnemy>().GetDistanceToEnemy() );
+            Debug.Log(GetComponent<VectorToEnemy>().GetDistanceToEnemy());
         }
 
-        if ( Input.GetButtonDown( "SpawnBombLine" )) // 'b' key
+        if (Input.GetButtonDown("SpawnBombLine")) // 'b' key
         {
             GetComponent<BombLine>().SpawnBombs();
         }
 
-        if ( Input.GetButtonDown( "PlacePowerUps" )) // 'p' key
+        if (Input.GetButtonDown("PlacePowerUps")) // 'p' key
         {
             GetComponent<PowerUps>().SpawnPowerUps();
         }
 
-        if ( Input.GetButtonDown( "PlaceBombSpiral" )) // 's' key
+        if (Input.GetButtonDown("PlaceBombSpiral")) // 's' key
         {
             GetComponent<BombSpiral>().SpawnBombSpiral();
         }
 
-        if ( Input.GetButtonDown( "SpawnHomingMissile" )) // 'h' key
+        if (Input.GetButtonDown("SpawnHomingMissile")) // 'h' key
         {
             SpawnHomingMissile();
         }
 
-        if ( Input.GetButtonDown( "RotateCamera" )) // 'r' key
+        if (Input.GetButtonDown("RotateCamera")) // 'r' key
         {
             GameController.RotateScreenClockwise90Deg();
         }
 
         // Look towards mouse position
-        Vector3 lookPoint = GameController.GetCamera().ScreenToWorldPoint( Input.mousePosition );
+        Vector3 lookPoint = GameController.GetCamera().ScreenToWorldPoint(Input.mousePosition);
         lookPoint.z = this.transform.position.z;
-        this.transform.rotation = Quaternion.RotateTowards( this.transform.rotation, Quaternion.LookRotation( Vector3.forward, lookPoint - this.transform.position ), 8f );
+        this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, Quaternion.LookRotation(Vector3.forward, lookPoint - this.transform.position), 8f);
 
-        GetComponent<ShipMotor>().HandleMovementInput( new Vector2( Input.GetAxisRaw( "Horizontal" ), Input.GetAxisRaw("Vertical") ) );
+        GetComponent<ShipMotor>().HandleMovementInput(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
     }
 
     /// <summary>
