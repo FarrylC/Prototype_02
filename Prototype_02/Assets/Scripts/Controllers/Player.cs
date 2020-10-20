@@ -108,9 +108,7 @@ public class Player : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other)
-    {
-        Debug.Log("Bitch");
-        
+    {        
         if (other.gameObject.CompareTag("Fuel")) 
         {
             other.gameObject.SetActive(false);
