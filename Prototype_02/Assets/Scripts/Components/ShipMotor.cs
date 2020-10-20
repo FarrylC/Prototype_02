@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShipMotor : MonoBehaviour
 {
@@ -7,6 +8,17 @@ public class ShipMotor : MonoBehaviour
     public float MaxSpeed = 1;
     float xSpeed = 0, ySpeed = 0;
     int xDir = 1, yDir = 1;
+
+    public float maxFuel = 50;
+    public float currentFuel;
+
+    public Fuel fuel;
+
+    public void Start()
+    {
+        currentFuel = maxFuel;
+        fuel.SetMaxFuel(maxFuel);
+    }
 
     /// <summary>
     /// Move the ship using it's transform only based on the current input vector. Do not use rigid bodies.
@@ -32,6 +44,7 @@ public class ShipMotor : MonoBehaviour
         {
             xSpeed += (MaxSpeed / AccelerationTime) * Time.deltaTime;
             xDir = (int)(input.x / Mathf.Abs(input.x));
+            UseFuel(5 * Time.deltaTime);
         }
 
         if (xSpeed > MaxSpeed)
@@ -48,6 +61,7 @@ public class ShipMotor : MonoBehaviour
         {
             ySpeed += (MaxSpeed / AccelerationTime) * Time.deltaTime;
             yDir = (int)(input.y / Mathf.Abs(input.y));
+            UseFuel(5 * Time.deltaTime);
         }
 
         if (ySpeed > MaxSpeed)
@@ -55,8 +69,20 @@ public class ShipMotor : MonoBehaviour
         else if (ySpeed <= 0)
             ySpeed = 0;
 
-        // Move player
-        transform.Translate(xSpeed * Time.deltaTime * xDir, ySpeed * Time.deltaTime * yDir, 0, Space.World);
+        if (currentFuel > 0) 
+        {
+            transform.Translate(xSpeed * Time.deltaTime * xDir, ySpeed * Time.deltaTime * yDir, 0, Space.World);
+        }
+        else
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
-    
+
+    public void UseFuel(float usage)
+    {
+        currentFuel -= usage;
+
+        fuel.SetFuel(currentFuel);
+    }
+
 }

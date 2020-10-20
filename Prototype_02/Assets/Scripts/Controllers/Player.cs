@@ -1,11 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     public GameObject HomingMissilePrefab;
-    private float bulletCount = 3;
+    private int bulletCount = 3;
+
+    public Text text;
+
+    public ShipMotor shipmotor;
 
     // Update is called once per frame
     void Update()
@@ -21,10 +26,10 @@ public class Player : MonoBehaviour
             Debug.Log(GetComponent<VectorToEnemy>().GetVectorToEnemy());
         }
 
-        if (Input.GetButtonDown("GetPlayerDistanceEnemy")) // 'd' key
+        /*if (Input.GetButtonDown("GetPlayerDistanceEnemy")) // 'd' key
         {
             Debug.Log(GetComponent<VectorToEnemy>().GetDistanceToEnemy());
-        }
+        }*/
 
         if (Input.GetButtonDown("SpawnBombLine")) // 'b' key
         {
@@ -62,6 +67,9 @@ public class Player : MonoBehaviour
         this.transform.rotation = Quaternion.RotateTowards(this.transform.rotation, Quaternion.LookRotation(Vector3.forward, lookPoint - this.transform.position), 8f);
 
         GetComponent<ShipMotor>().HandleMovementInput(new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")));
+
+        text.text = "Ammo:" + bulletCount;
+
     }
 
     /// <summary>
