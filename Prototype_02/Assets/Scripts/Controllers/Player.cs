@@ -108,7 +108,7 @@ public class Player : MonoBehaviour
     }
 
     void OnTriggerEnter2D(Collider2D other)
-    {        
+    {
         if (other.gameObject.CompareTag("Fuel")) 
         {
             other.gameObject.SetActive(false);
@@ -119,10 +119,5 @@ public class Player : MonoBehaviour
             other.gameObject.SetActive(false);
             bulletCount++;
         }
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log("Fuck");
     }
 }
