@@ -12,9 +12,14 @@ public class Player : MonoBehaviour
 
     public ShipMotor shipmotor;
 
+    private Rigidbody2D playerShip;
+    private BoxCollider2D ship;
+
     // Update is called once per frame
     void Update()
     {
+
+        playerShip = GetComponent<Rigidbody2D>();
 
         if (Input.GetButtonDown("SpawnObjectRelative")) // 'o' key
         {
@@ -29,7 +34,7 @@ public class Player : MonoBehaviour
         /*if (Input.GetButtonDown("GetPlayerDistanceEnemy")) // 'd' key
         {
             Debug.Log(GetComponent<VectorToEnemy>().GetDistanceToEnemy());
-        }*/
+        }
 
         if (Input.GetButtonDown("SpawnBombLine")) // 'b' key
         {
@@ -44,7 +49,7 @@ public class Player : MonoBehaviour
         if (Input.GetButtonDown("PlaceBombSpiral")) // 's' key
         {
             GetComponent<BombSpiral>().SpawnBombSpiral();
-        }
+        }*/
 
         if (Input.GetButtonDown("SpawnHomingMissile")) // 'h' key, alt key is Left Click/mouse 0
         {
@@ -100,5 +105,26 @@ public class Player : MonoBehaviour
         bulletCount++;
         Debug.Log("bullets:" + bulletCount);
 
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("Bitch");
+        
+        if (other.gameObject.CompareTag("Fuel")) 
+        {
+            other.gameObject.SetActive(false);
+            shipmotor.currentFuel += 10;
+        }
+        if (other.gameObject.CompareTag("Bullet"))
+        {
+            other.gameObject.SetActive(false);
+            bulletCount++;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log("Fuck");
     }
 }
