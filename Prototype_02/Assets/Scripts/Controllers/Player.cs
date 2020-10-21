@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class Player : MonoBehaviour
 {
@@ -118,6 +120,10 @@ public class Player : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             bulletCount++;
+        }
+        if(other.gameObject.CompareTag("Asteroid"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }
