@@ -65,10 +65,10 @@ public class HomingMissile : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //UNCOMMENT BELOW FOR ASTEROIDS to destroy homingMissiles, Checks for a script attached to Asteroids called 'Asteroid;
-        /*else if(collision.gameObject.GetComponent<Asteroid>() = true)
+        if (collision.gameObject.tag == "Asteroid")
         {
+            Destroy(collision.gameObject);
             Destroy(gameObject);
-        }*/
+        }
     }
 }
